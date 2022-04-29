@@ -1,0 +1,100 @@
+body {
+  background-color: #042622;
+  color: white;
+  min-height: 100vh;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.signout{
+  margin:14px;
+  text-align: right;
+  width: 75px;
+  height: 30px;
+  text-align: center;
+}
+
+.signIn{
+  height:40vh;
+  display:flex;
+  flex-direction: row;
+}
+
+.signInButton{
+  align-self: center;
+  height:50px;
+  width:100px;
+  margin-left: 638px;
+}
+
+.send{
+  padding-bottom: 10px;
+}
+
+.sendButton{
+  height:45px;
+  margin-left:3px;
+}
+
+input{
+  width:35vw;
+  height:40px;
+}
+
+main{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+}
+
+.messages{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  width: 100vw;
+}
+
+.messageSent{
+  margin-right: 50px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  text-align: right;
+}
+
+.messageReceived{
+  margin-left: 50px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  text-align:left;
+}
+
+
+.row{
+  display:flex;
+  flex-direction:row;
+  margin-bottom: 30px;
+}
+
+.messageReceived .row {
+  flex-direction: row-reverse;
+}
+
+form{
+  position: fixed;
+  bottom:10px;
+}
+
+.title{
+  text-align:center;
+  width:100vw;
+}
+
+
+#signInTitle{
+  margin-top: 80px;
+}
+

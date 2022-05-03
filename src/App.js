@@ -1,7 +1,8 @@
 // YouTube Tutorial - https://www.youtube.com/watch?v=zQyrwxMPm88
+// Website: jamchat.netlify.app
+
 import './App.css';
 import { initializeApp } from '@firebase/app';
-//import { getFirestore } from "firebase/firestore";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -22,6 +23,7 @@ firebase.initializeApp({
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
+//Main App component
 function App() {
   const [user] = useAuthState(auth);
 
@@ -34,7 +36,7 @@ function App() {
   );
 }
 
-// The component for signing in
+// The component for sign in page
 function SignIn(){
   const signInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -53,12 +55,14 @@ function SignIn(){
   )
 }
 
+//The component for sign out button
 function SignOut(){
   return auth.currentUser && (
     <button class="signout" onClick = {() => auth.signOut()}>Sign out</button>
   )
 }
 
+//The component for the chatroom
 function ChatRoom(){
   const messagesRef = firestore.collection("messages");
   const query = messagesRef.orderBy("createdAt").limit(100);
@@ -68,6 +72,7 @@ function ChatRoom(){
     e.preventDefault();
     const { uid, photoURL, displayName} = auth.currentUser;
     console.dir(auth.currentUser)
+    //Adds the data to the firestore database
     await messagesRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -77,7 +82,8 @@ function ChatRoom(){
     })
     setFormValue("")
   }
-
+  
+  //Scrolls all the way to the bottom whenever there's a new message
   useEffect(() => {
     window.scrollTo(0, document.body.scrollHeight);
   }, [messages])
@@ -103,8 +109,10 @@ function ChatRoom(){
   )
 }
 
+//The component for each individual message
 function ChatMessage(props){
   const {text,uid,photoURL,displayName} = props.message;
+  //Determines if message was sent by user or received
   const messageClass = uid === auth.currentUser.uid ? "Sent" : "Received";
 
   return(

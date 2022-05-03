@@ -119,8 +119,8 @@ function ChatMessage(props){
     <div class={`message${messageClass}`}>
       <div class="row"> 
         <div style={{padding:'5px'}}>
-          <p class="name">{displayName}</p>
-          <h3 style={{color:'#a1ffba', maxWidth:'260px', wordBreak:'break-all'}}>{text}</h3>
+          <p class="name" style={{color:'#a1ffba'}}>{displayName}</p>
+          <h3 style={{color:'white', maxWidth:'260px', wordBreak:'break-all'}}>{text}</h3>
         </div>
         <img style={{padding:'5px', borderRadius: "50%"}} src={photoURL} width="80" height="80"/>
       </div>

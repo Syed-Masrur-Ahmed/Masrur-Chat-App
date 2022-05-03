@@ -10,6 +10,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { useState, useEffect } from "react";
 
+// Initializes the app
 firebase.initializeApp({
   apiKey: "AIzaSyBp2VT_zCshp62pR0Q9SkyLMV8bzDCDIM0",
   authDomain: "chat-app-e8138.firebaseapp.com",
@@ -23,7 +24,7 @@ firebase.initializeApp({
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
-//Main App component
+// Main App component
 function App() {
   const [user] = useAuthState(auth);
 
@@ -55,14 +56,14 @@ function SignIn(){
   )
 }
 
-//The component for sign out button
+// The component for sign out button
 function SignOut(){
   return auth.currentUser && (
     <button class="signout" onClick = {() => auth.signOut()}>Sign out</button>
   )
 }
 
-//The component for the chatroom
+// The component for the chatroom
 function ChatRoom(){
   const messagesRef = firestore.collection("messages");
   const query = messagesRef.orderBy("createdAt").limit(100);
@@ -72,7 +73,7 @@ function ChatRoom(){
     e.preventDefault();
     const { uid, photoURL, displayName} = auth.currentUser;
     console.dir(auth.currentUser)
-    //Adds the data to the firestore database
+    // Adds the data to the firestore database
     await messagesRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
@@ -83,7 +84,7 @@ function ChatRoom(){
     setFormValue("")
   }
   
-  //Scrolls all the way to the bottom whenever there's a new message
+  // Scrolls all the way to the bottom whenever there's a new message
   useEffect(() => {
     window.scrollTo(0, document.body.scrollHeight);
   }, [messages])
@@ -109,10 +110,10 @@ function ChatRoom(){
   )
 }
 
-//The component for each individual message
+// The component for each individual message
 function ChatMessage(props){
   const {text,uid,photoURL,displayName} = props.message;
-  //Determines if message was sent by user or received
+  // Determines if message was sent by user or received
   const messageClass = uid === auth.currentUser.uid ? "Sent" : "Received";
 
   return(
@@ -122,7 +123,7 @@ function ChatMessage(props){
           <p class="name" style={{color:'#a1ffba'}}>{displayName}</p>
           <h3 style={{color:'white', maxWidth:'260px', wordBreak:'break-all'}}>{text}</h3>
         </div>
-        <img style={{padding:'5px', borderRadius: "50%"}} src={photoURL} width="80" height="80"/>
+        <img style={{padding:'5px', borderRadius: "50%"}} src={photoURL} width="80vw" height="80vw"/>
       </div>
     </div>  
       )

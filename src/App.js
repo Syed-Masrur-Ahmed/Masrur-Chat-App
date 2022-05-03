@@ -74,7 +74,7 @@ function ChatRoom(){
     const { uid, photoURL, displayName} = auth.currentUser;
     console.dir(auth.currentUser)
     // Adds the data to the firestore database
-    await messagesRef.add({
+    formValue != "" && await messagesRef.add({
       text: formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,

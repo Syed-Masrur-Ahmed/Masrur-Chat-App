@@ -66,7 +66,7 @@ function SignOut(){
 // The component for the chatroom
 function ChatRoom(){
   const messagesRef = firestore.collection("messages");
-  const query = messagesRef.orderBy("createdAt").limit(100);
+  const query = messagesRef.orderBy("createdAt").limitToLast(100);
   const [messages] = useCollectionData(query, {idField:"id"});
   const [formValue, setFormValue] = useState("");
   const sendMessage = async (e) => {
@@ -74,13 +74,17 @@ function ChatRoom(){
     const { uid, photoURL, displayName} = auth.currentUser;
     console.dir(auth.currentUser)
     // Adds the data to the firestore database
-    formValue != "" && await messagesRef.add({
-      text: formValue,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid,
-      photoURL,
-      displayName 
-    })
+    
+    if (formValue !== "") {
+      console.log(formValue)
+      await messagesRef.add({
+        text: formValue,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        uid,
+        photoURL,
+        displayName 
+      })
+    }
     setFormValue("")
   }
   
@@ -103,7 +107,7 @@ function ChatRoom(){
         </div>
         <form class="send" onSubmit={sendMessage}>
           <input value = {formValue} onChange={(e) => setFormValue(e.target.value)}/>
-          <button type="submit" class="sendButton">SEND</button>
+          <button type="submit" class="sendButton" disabled={!formValue}>SEND</button>
         </form>
       </div>
     </main>

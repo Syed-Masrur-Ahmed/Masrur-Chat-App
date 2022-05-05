@@ -96,7 +96,7 @@ function ChatRoom(){
   return(
     <main>
       <SignOut/>
-      <div class="title">
+      <div class="title" id="homeTitle">
         <h2>JamChat</h2>
       </div>
       <div class="messages">

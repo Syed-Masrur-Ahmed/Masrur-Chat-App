@@ -92,9 +92,14 @@ form{
 
 .title{
   text-align:center;
-  width:100vw;
+  width:100vw; 
 }
 
+#homeTitle{
+  background-color: #a1ffba;
+  color: #042622;
+  margin-bottom: 3vh;
+}
 
 #signInTitle{
   margin-top: 80px;
